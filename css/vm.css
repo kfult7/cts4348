@@ -1,0 +1,40 @@
+/*------------------------NODE------------------------*/
+main section div.container div.vm ul {
+  background: white;
+  bottom: 25px;
+  right: 50px;
+  margin: 0px;
+  padding: 0px;
+  /*position: absolute;*/
+  width: 550px;
+}
+
+main section div.container div.vm ul li {
+  border-top: 1px solid lightgrey;
+  font-size: 14px;
+  list-style: none;
+  padding: 0px;
+  padding: 8px 30px;
+  margin: 0px;
+}
+
+main section div.container div.vm ul li:first-child {
+  border-top: none;
+}
+
+main section div.container div.vm ul li span{
+  margin: 0px 0px 0px 115px;
+}
+
+main section div.container div.vm ul li span:first-child{
+  margin: 0px;
+}
+
+main section div.container div.vm div.vm1info{
+  display: inline-block;
+  margin: 0px;
+}
+
+.icono-cross {
+transform: scale(0.5);
+}

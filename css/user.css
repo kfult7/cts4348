@@ -1,0 +1,43 @@
+main section div.container div.user ul {
+  background: white;
+  bottom: 25px;
+  right: 50px;
+  margin: 0px;
+  padding: 0px;
+  width: 550px;
+}
+
+main section div.container div.user ul li {
+  border-top: 1px solid lightgrey;
+  font-size: 14px;
+  list-style: none;
+  padding: 0px;
+  padding: 8px 30px;
+  margin: 0px;
+}
+
+main section div.container div.user ul li:first-child {
+  border-top: none;
+}
+
+main section div.container div.user ul li span {
+  margin: 0px 0px 0px 115px;
+  display: inline-block;;
+}
+
+main section div.container div.user ul li span.date {
+  width: 150px;
+}
+
+main section div.container div.user ul li span.action:before {
+  content: attr(data-icon);
+  font-family: 'Material Icons';
+  font-size: 25px;
+}
+
+main section div.container div.user ul li span:first-child{
+  margin: 0px;
+}
+
+main section div.container div.user ul li span button.submit{
+}

@@ -1,0 +1,22 @@
+div.container {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  height: 100%;
+  width: 700px;
+}
+
+div.container div {
+  box-sizing: border-box;
+  display: none;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 100%;
+  padding: 35px 75px;
+  position: relative;
+  width: 100%;
+}
+
+div.container div.active {
+  display: inline-block;
+}
