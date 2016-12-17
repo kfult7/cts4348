@@ -80,12 +80,21 @@
                 <li><span>Snapshot 4</span><span>February 20, 2017</span><span><button>Submit</button></span></li>
               </ul>
             </div>
-
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Please wait for VM...<progress value="0" max="10" id="progressBar"></progress></p>
+    </div>
+
+  </div>
 
   <script>
   $("main section nav ul li").click(function() {
