@@ -70,7 +70,7 @@ main section nav ul li.active {
 main section nav ul li.active::after {
   border-top: 15px solid transparent ;
   border-bottom: 15px solid transparent ;
-  border-right:15px solid white ;
+  border-right:15px solid #424242 ;
   border-left:15px solid transparent ;
   bottom: 50%;
   content:" ";
