@@ -57,9 +57,9 @@
                 <!-- <i class="material-icons">&#xE047;</i>
                 <i class="material-icons">&#xE037;</i> -->
                 <!-- <i class="material-icons">&#xE042;</i> -->
-                <button  id="myBtn" data-icon="&#xE037;">start</button>
-                <button  id="myBtn" data-icon="&#xE047;">stop</button>
-                <button  id="myBtn" data-icon="&#xE042;">restart</button>
+                <button  id="startVM" data-icon="&#xE037;">start</button>
+                <button  data-icon="&#xE047;">stop</button>
+                <button  data-icon="&#xE042;">restart</button>
               </span>
                         <ul>
                             <li data-list="CPU">1</li>
@@ -91,7 +91,7 @@
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Please wait for VM...<progress value="0" max="10" id="progressBar"></progress></p>
+            <p>Please wait for VM to start...<progress value="0" max="10" id="progressBar"></progress></p>
         </div>
 
     </div>
@@ -110,7 +110,7 @@
         // Get the modal
         var modal = document.getElementById('myModal');
         // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+        var btn = document.getElementById("startVM");
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         // When the user clicks the button, open the modal
