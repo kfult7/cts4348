@@ -3,7 +3,7 @@ div.container {
   vertical-align: top;
   position: relative;
   height: 100%;
-  width: 700px;
+  width: 800px;
 }
 
 div.container > div {
@@ -21,4 +21,29 @@ div.container > div {
 
 div.container div.active {
   display: inline-block;
+}
+
+
+
+main section div.container div ul li span {
+  margin: 0px 0px 0px 75px;
+  display: inline-block;
+}
+
+main section div.container div ul li span.title {
+  width: 100px;
+}
+
+main section div.container div ul li span.date {
+  width: 150px;
+}
+
+main section div.container div ul li span.action:before {
+  content: attr(data-icon);
+  font-family: 'Material Icons';
+  font-size: 20px;
+}
+
+main section div.container div ul li span:first-child{
+  margin: 0px;
 }

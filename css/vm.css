@@ -1,10 +1,10 @@
 main section div.container div.vm:before {
     content: attr(data-icon);
-    color: #f5f5f5;
+    color: #e6e6e6;
     font-family: 'Material Icons';
-    font-size: 650px;
+    font-size: 730px;
     left: -250px;
-    line-height: 600px;
+    line-height: 660px;
     position: absolute;
     top: -30px;
     z-index: -1;
@@ -13,12 +13,12 @@ main section div.container div.vm:before {
 main section div.container div.vm div.machine span {
     display: inline-block;
     vertical-align: top;
-    padding: 40px 0px 0px;
+    padding: 10px 0px 0px;
 }
 
 main section div.container div.vm div.machine span button:before {
     content: attr(data-icon);
-    color: #e0e0e0;
+    color: #e6e6e6;
     font-family: 'Material Icons';
     font-size: 50px;
     left: 0px;
@@ -31,17 +31,17 @@ main section div.container div.vm div.machine span button:before {
 main section div.container div.vm div.machine span button {
     background: none;
     border: none;
-    padding: 60px 0px 0px;
+    padding: 50px 0px 0px;
     position: relative;
     font-family: 'Ubuntu', sans-serif;
-    font-size: 18px;
-    width: 76px;
+    font-size: 20px;
+    width: 75px;
 }
 
 main section div.container div.vm div.machine ul {
     border: 1px solid lightgrey;
     display: inline-block;
-    margin: 0px 0px 0px 75px;
+    margin: 0px 0px 0px 150px;
     padding: 10px 0px;
     width: 235px;
 }
@@ -72,6 +72,7 @@ main section div.container div.vm div.machine ul li:before {
 
 main section div.container div.vm div.snapshots {
     margin: 30px 0px 0px;
+    position: relative;;
 }
 
 main section div.container div.vm div.snapshots ul {
@@ -79,7 +80,7 @@ main section div.container div.vm div.snapshots ul {
     right: 50px;
     margin: 0px;
     padding: 0px;
-    width: 550px;
+    width: 100%;
 }
 
 main section div.container div.vm div.snapshots ul li {
@@ -89,6 +90,15 @@ main section div.container div.vm div.snapshots ul li {
     padding: 0px;
     padding: 8px 30px;
     margin: 0px;
+}
+
+main section div.container div.vm div.snapshots ul li.template {
+    display: none;
+}
+
+main section div.container div.vm div.snapshots ul li.new {
+    /*font-style: italic;*/
+    color: grey;
 }
 
 main section div.container div.vm div.snapshots ul li:first-child {
@@ -103,6 +113,21 @@ main section div.container div.vm div.snapshots ul li span:first-child {
     margin: 0px;
 }
 
+
+
+main section div.container div.vm ul li span.action:before {
+  content: attr(data-icon);
+  font-family: 'Material Icons';
+  font-size: 20px;
+}
+
+.w3-progressbar {
+  background-color: #555;
+  height:1%;
+  width:0%;
+  position:absolute;
+  line-height:inherit
+}
 
 /*
 main section div.container div.vm div.snapshots div.vm1info{

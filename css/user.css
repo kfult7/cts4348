@@ -20,24 +20,7 @@ main section div.container div.user ul li:first-child {
   border-top: none;
 }
 
-main section div.container div.user ul li span {
-  margin: 0px 0px 0px 115px;
-  display: inline-block;;
-}
 
-main section div.container div.user ul li span.date {
-  width: 150px;
-}
-
-main section div.container div.user ul li span.action:before {
-  content: attr(data-icon);
-  font-family: 'Material Icons';
-  font-size: 25px;
-}
-
-main section div.container div.user ul li span:first-child{
-  margin: 0px;
-}
 
 main section div.container div.user ul li span button.submit{
 }
