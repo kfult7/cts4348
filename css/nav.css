@@ -6,7 +6,6 @@ html, body {
 body {
   background: url("../images/honeycomb.svg") center bottom fixed;
   background-repeat: repeat-x;
-  /*background-size: cover;*/
 }
 
 main {

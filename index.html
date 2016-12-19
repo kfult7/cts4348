@@ -53,19 +53,13 @@
                     <h2>Node <span class="vm" ></span></h2>
                     <div class="machine">
                         <span>
-                            <!-- <i class="material-icons">&#xE039;</i> -->
-                            <!-- <i class="material-icons">&#xE047;</i>
-                            <i class="material-icons">&#xE037;</i> -->
-                            <!-- <i class="material-icons">&#xE042;</i> -->
                             <button  onclick="move()" data-icon="&#xE037;">start</button>
                             <button  data-icon="&#xE047;">stop</button>
                             <button  data-icon="&#xE042;">restart</button>
 
-                            <div class="progress-container">
-                                <div id="progressBar" class="w3-progressbar">
-                                  <br/>
-                                  <div id="demo" class="w3-center w3-text-white ">0%</div>
-                                </div>
+                            <div id="progressBar" class="progressbar">
+                              <br/>
+                              <div id="bar">0%</div>
                             </div>
 
                         </span>
@@ -98,16 +92,6 @@
         </section>
     </main>
 
-    <div id="myModal" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Please wait for VM to start...<progress value="0" max="10" id="progressBar"></progress></p>
-        </div>
-
-    </div>
-
     <script>
         $("main section nav ul li").click(
             function() {
@@ -121,34 +105,6 @@
             }
         )
 
-        // // Get the modal
-        // var modal = document.getElementById('myModal');
-        // // Get the button that opens the modal
-        // var btn = document.getElementById("startVM");
-        // // Get the <span> element that closes the modal
-        // var span = document.getElementsByClassName("close")[0];
-        // // When the user clicks the button, open the modal
-        // btn.onclick = function() {
-        //         modal.style.display = "block";
-        //     }
-        //     // When the user clicks on <span> (x), close the modal
-        // span.onclick = function() {
-        //         modal.style.display = "none";
-        //     }
-        //     // When the user clicks anywhere outside of the modal, close it
-        // window.onclick = function(event) {
-        //     if (event.target == modal) {
-        //         modal.style.display = "none";
-        //     }
-        // }
-        //
-        // var timeleft = 10;
-        // var downloadTimer = setInterval(function() {
-        //     document.getElementById("progressBar").value = 10 - --timeleft;
-        //     if (timeleft <= 0)
-        //         clearInterval(downloadTimer);
-        // }, 1000);
-
         function move() {
             var elem = document.getElementById("progressBar");
             var width = 1;
@@ -160,7 +116,7 @@
                 } else {
                     width++;
                     elem.style.width = width / 3 + '%';
-                    document.getElementById("demo").innerHTML = width * 1 + '%';
+                    document.getElementById("bar").innerHTML = width * 1 + '%';
                 }
             }
 
