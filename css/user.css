@@ -4,7 +4,7 @@ main section div.container div.user ul {
   right: 50px;
   margin: 0px;
   padding: 0px;
-  width: 550px;
+  width: 100%;
 }
 
 main section div.container div.user ul li {
@@ -12,8 +12,28 @@ main section div.container div.user ul li {
   font-size: 14px;
   list-style: none;
   padding: 0px;
-  padding: 8px 30px;
+  padding: 10px 60px;
   margin: 0px;
+}
+
+main section div.container div.user ul li span {
+    display: inline-block;
+    vertical-align: top;
+}
+
+main section div.container div.user ul li button:before {
+    content: attr(data-icon);
+    font-family: 'Material Icons';
+    font-size: 20px;
+    text-align: left;
+}
+
+main section div.container div.user ul li span button {
+    background: none;
+    border: none;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    width: 25px;
 }
 
 main section div.container div.user ul li:first-child {
