@@ -19,16 +19,16 @@
 <body>
     <main>
         <div class="notifications">
-            <span class="date">December 17, 2016</span>
+            <span id="date"></span>
         </div>
 
         <section>
             <nav>
                 <ul>
                     <li class="user active"><span class="user">GG</span><span class="ip" style="bottom: 15px; font-size: 14px;">Welcome ggome002</span></li>
-                    <li class="vm" data-vm="101"><span class="name">Node 100</span><span class="ip">10.128.1.100</span></li>
-                    <li class="vm" data-vm="102"><span class="name">Node 101</span><span class="ip">10.128.1.101</span></li>
-                    <li class="vm" data-vm="103"><span class="name">Node 102</span><span class="ip">10.128.1.102</span></li>
+                    <li class="vm" data-vm="101"><span class="name">Node 101</span><span class="ip">10.128.1.101</span></li>
+                    <li class="vm" data-vm="102"><span class="name">Node 102</span><span class="ip">10.128.1.102</span></li>
+                    <li class="vm" data-vm="103"><span class="name">Node 103</span><span class="ip">10.128.1.103</span></li>
                 </ul>
             </nav>
 
@@ -50,17 +50,20 @@
                 </div>
 
                 <div class="vm" data-icon="&#xE30C;">
-                    <h2>Node <span class="vm" ></span></h2>
+                    <h2>Node <span class="vm"></span></h2>
                     <div class="machine">
                         <span>
-                            <button  onclick="move()" data-icon="&#xE037;">start</button>
-                            <button  data-icon="&#xE047;">stop</button>
-                            <button  data-icon="&#xE042;">restart</button>
+                            <button onclick="progress()" data-icon="&#xE037;"></button>
+                            <span>start</span>
+                        <button onclick="progress()" data-icon="&#xE047;"></button>
+                        <span>stop</span>
+                        <button onclick="progress()" data-icon="&#xE042;"></button>
+                        <span>restart</span>
 
-                            <div id="progressBar" class="progressbar">
-                              <br/>
-                              <div id="bar">0%</div>
-                            </div>
+                        <div id="progressBar" class="progressbar">
+                            <br/>
+                            <div id="bar">0%</div>
+                        </div>
 
                         </span>
                         <ul>
@@ -68,6 +71,8 @@
                             <li data-list="Memory">512 MB</li>
                             <li data-list="Hard disk">20 GB</li>
                             <li data-list="Host">CTS4348-a</li>
+                            <li data-list="VNC Address">vnc://lithium.cs.fiu.edu:XXXX</li>
+                            <li data-list="VNC Password">XXXXXXX</li>
                         </ul>
                     </div>
 
@@ -92,6 +97,11 @@
     </main>
 
     <script>
+        // display date
+        var d = new Date();
+        document.getElementById("date").innerHTML = d.toDateString();
+
+        // navigation
         $("main section nav ul li").click(
             function() {
                 $("main section nav ul li").removeClass("active");
@@ -104,7 +114,8 @@
             }
         )
 
-        function move() {
+        // progress bar
+        function progress() {
             var elem = document.getElementById("progressBar");
             var width = 1;
             var id = setInterval(frame, 50);
@@ -118,14 +129,15 @@
                     document.getElementById("bar").innerHTML = width * 1 + '%';
                 }
             }
-
         }
 
+        // delete snapshot
         $("button.delete").click(function() {
 
             $(this).closest("li").remove();
         })
 
+        // add snapshot
         $("button.add").click(function() {
 
             if ($("div.snapshots ul li").length < 6) {

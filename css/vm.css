@@ -38,12 +38,23 @@ main section div.container div.vm div.machine span button {
     width: 75px;
 }
 
+main section div.container div.vm div.machine span span {
+    /*background-color: yellow;*/
+    padding: 0px 10px;
+    display: none;
+}
+
+main section div.container div.vm div.machine span button:hover + span {
+    display: inline;
+}
+
 main section div.container div.vm div.machine ul {
     border: 1px solid lightgrey;
     display: inline-block;
-    margin: 0px 0px 0px 150px;
+    margin: 0px 0px 0px 200px;
     padding: 10px 0px;
-    width: 235px;
+    width: 275px;
+    font-size: 12px;
 }
 
 main section div.container div.vm div.machine ul li {
@@ -64,7 +75,6 @@ main section div.container div.vm div.machine ul li:before {
     padding: 5px 10px;
     position: absolute;
     text-align: right;
-    /*font-size: 10px;*/
     left: 0px;
     top: 0px;
     width: 100px;
@@ -72,7 +82,7 @@ main section div.container div.vm div.machine ul li:before {
 
 main section div.container div.vm div.snapshots {
     margin: 30px 0px 0px;
-    position: relative;;
+    position: relative;
 }
 
 main section div.container div.vm div.snapshots ul {
@@ -133,18 +143,16 @@ main section div.container div.vm div.snapshots ul li span:first-child {
     margin: 0px;
 }
 
-
-
 main section div.container div.vm ul li span.action:before {
-  content: attr(data-icon);
-  font-family: 'Material Icons';
-  font-size: 20px;
+    content: attr(data-icon);
+    font-family: 'Material Icons';
+    font-size: 20px;
 }
 
 main section div.container div.vm div.machine span div.progressbar {
-  background-color: #555;
-  height:1%;
-  width:0%;
-  position:absolute;
-  line-height:inherit
+    background-color: #555;
+    height:1%;
+    width:0%;
+    position:absolute;
+    line-height:inherit
 }

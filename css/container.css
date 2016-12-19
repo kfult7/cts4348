@@ -3,7 +3,7 @@ div.container {
   vertical-align: top;
   position: relative;
   height: 100%;
-  width: 800px;
+  width: 900px;
 }
 
 div.container > div {
@@ -22,8 +22,6 @@ div.container > div {
 div.container div.active {
   display: inline-block;
 }
-
-
 
 main section div.container div ul li span {
   margin: 0px 0px 0px 75px;

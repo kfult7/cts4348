@@ -10,7 +10,7 @@ body {
 
 main {
   margin: 100px auto;
-  width: 1000px;
+  width: 1100px;
 }
 
 main div.notifications {
@@ -19,6 +19,7 @@ main div.notifications {
   margin: 0px 0px 25px;
   min-height: 20px;
   position: relative;
+  text-align: right;
 }
 
 main div.notifications span.date{
