@@ -3,7 +3,7 @@ div.container {
   vertical-align: top;
   position: relative;
   height: 100%;
-  width: 900px;
+  width: 800px;
 }
 
 div.container > div {
@@ -13,7 +13,7 @@ div.container > div {
   font-size: 14px;
   height: 100%;
   overflow: hidden;
-  padding: 35px 75px;
+  padding: 0px 35px 75px;
   position: relative;
   width: 100%;
   z-index: 101;

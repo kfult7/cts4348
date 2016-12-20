@@ -33,7 +33,7 @@
             </nav>
 
             <div class="container">
-                <div class="user active">
+                <div class="user ">
                     <h2>Notice:</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus augue erat, sagittis a lorem at, blandit faucibus quam. Praesent ultricies quis lacus non aliquam.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus augue
                         erat, sagittis a lorem at, blandit faucibus quam. Praesent ultricies quis lacus non aliquam.</p>
@@ -49,31 +49,23 @@
                     </ul>
                 </div>
 
-                <div class="vm" data-icon="&#xE30C;">
+                <div class="vm active" data-icon="&#xE30C;">
                     <h2>Node <span class="vm"></span></h2>
                     <div class="machine">
-                        <span>
-                            <button onclick="progress()" data-icon="&#xE037;"></button>
-                            <span>start</span>
-                        <button onclick="progress()" data-icon="&#xE047;"></button>
-                        <span>stop</span>
-                        <button onclick="progress()" data-icon="&#xE042;"></button>
-                        <span>restart</span>
-
-                        <div id="progressBar" class="progressbar">
-                            <br/>
-                            <div id="bar">0%</div>
-                        </div>
-
-                        </span>
                         <ul>
                             <li data-list="CPU">1</li>
                             <li data-list="Memory">512 MB</li>
                             <li data-list="Hard disk">20 GB</li>
-                            <li data-list="Host">CTS4348-a</li>
-                            <li data-list="VNC Address">vnc://lithium.cs.fiu.edu:XXXX</li>
-                            <li data-list="VNC Password">XXXXXXX</li>
+                            <li class="host" data-list="Host">CTS4348-A</li>
+                            <li class="port" data-list="VNC Address">PORTS</li>
+                            <li class="password" data-list="VNC Password">PASSWORD</li>
                         </ul>
+
+                        <span>
+                          <button onclick="progress()" data-icon="&#xE037;" data-name="start"></button>
+                          <button onclick="progress()" data-icon="&#xE047;" data-name="stop"></button>
+                          <button onclick="progress()" data-icon="&#xE042;" data-name="restart"></button>
+                        </span>
                     </div>
 
 
@@ -111,6 +103,14 @@
                 if ($(this).hasClass("vm")) {
                     $("div.container div.vm span.vm").html($(this).attr("data-vm"));
                 }
+
+                if (vms !== null) {
+                    var thisVM = $(this).data("vm")
+                    $("div.machine ul li.host").html(thisVM.host);
+                    $("div.machine ul li.port").html(thisVM.vncPort);
+                    $("div.machine ul li.password").html(thisVM.vncPasswd);
+                }
+
             }
         )
 
@@ -149,7 +149,24 @@
                 alert("Snapshot limit is 5")
             }
         })
+
+
+        var vms = null
+
+        function pull(username) {
+            $.get("http://10.128.1.150/?username=" + username, function(data) {
+
+                vms = JSON.parse(data)
+                for (var i in vms) {
+                    var li = $("li.vm")[i]
+                    $(li).find("span.ip").html(vms[i].ip)
+                    $(li).find("span.name").html(vms[i].name)
+                    $(li).data("vm", vms[i])
+                }
+            });
+        }
     </script>
 </body>
 
 </html>
+>
