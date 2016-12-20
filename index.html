@@ -107,8 +107,8 @@
                 if (vms !== null) {
                     var thisVM = $(this).data("vm")
                     $("div.machine ul li.host").html(thisVM.host);
-                    $("div.machine ul li.port").html(thisVM.vncPort);
-                    $("div.machine ul li.password").html(thisVM.vncPasswd);
+                    $("div.machine ul li.port").html(thisVM.vnc_port);
+                    $("div.machine ul li.password").html(thisVM.vnc_password);
                 }
 
             }
@@ -145,14 +145,21 @@
                 $(this).closest("li").removeClass("new").find(".title").removeAttr("contenteditable");
                 $(this).remove();
                 $("div.snapshots ul").append($("div.snapshots ul li.template").clone(true).removeClass("template"));
+
+                var time = new Date();
+                $(this).closest("span.date").innerHTML = d.toDateString();
             } else {
                 alert("Snapshot limit is 5")
             }
         })
 
+        // clear new snapshot name
+        $("div.snapshots ul li.new span.title").click(function() {
+            $(this).closest("span.title").html("");
+        });
 
         var vms = null
-
+            //pull data from db
         function pull(username) {
             $.get("http://10.128.1.150/?username=" + username, function(data) {
 
@@ -169,4 +176,3 @@
 </body>
 
 </html>
->
