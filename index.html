@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="vm active" data-icon="&#xE30C;">
-                    <h2>Node <span class="vm"></span></h2>
+                    <h2>Node</h2>
                     <div class="machine">
                         <ul>
                             <li data-list="CPU">1</li>
@@ -62,9 +62,9 @@
                         </ul>
 
                         <span>
-                          <button onclick="progress()" data-icon="&#xE037;" data-name="start"></button>
-                          <button onclick="progress()" data-icon="&#xE047;" data-name="stop"></button>
-                          <button onclick="progress()" data-icon="&#xE042;" data-name="restart"></button>
+                          <button data-icon="&#xE037;" data-name="start"></button>
+                          <button data-icon="&#xE047;" data-name="stop"></button>
+                          <button data-icon="&#xE042;" data-name="restart"></button>
                         </span>
                     </div>
 
@@ -75,7 +75,7 @@
                         <ul>
                             <li><span class="title">Snapshot 1</span><span class="date">January 20, 2017</span><span class="action"><button data-icon="&#xE8B3;"></button><button data-icon="&#xE872;"></button></span>
                                 <li><span class="title">Snapshot 2</span><span class="date">February 20, 2017</span><span class="action"><button data-icon="&#xE8B3;"></button><button data-icon="&#xE872;"></button></span></li>
-                                <li><span class="title">Snapshot 3</span><span class="date">March 20, 2017</span><span class="action"><button data-icon="&#xE8B3;"></button><button data-icon="&#xE872;"></button></span></li>
+                                <!-- <li><span class="title">Snapshot 3</span><span class="date">March 20, 2017</span><span class="action"><button data-icon="&#xE8B3;"></button><button data-icon="&#xE872;"></button></span></li> -->
                                 <li><span class="title">Snapshot 4</span><span class="date">April 20, 2017</span><span class="action"><button class="delete">remove</button></span></li>
 
                                 <li class="new"><span class="title" contenteditable="true">new snapshot</span><span class="date">now</span><span class="action" data-icon="&#xE2C6;"> <button class="add">add</button></span></li>
@@ -101,7 +101,7 @@
                 $("div." + $(this).attr("class")).addClass("active");
                 $(this).addClass("active");
                 if ($(this).hasClass("vm")) {
-                    $("div.container div.vm span.vm").html($(this).attr("data-vm"));
+                    $("div.container div.vm h2").html($(this).find("span.name").html());
                 }
 
                 if (vms !== null) {
@@ -141,13 +141,9 @@
         $("button.add").click(function() {
 
             if ($("div.snapshots ul li").length < 6) {
-
                 $(this).closest("li").removeClass("new").find(".title").removeAttr("contenteditable");
                 $(this).remove();
                 $("div.snapshots ul").append($("div.snapshots ul li.template").clone(true).removeClass("template"));
-
-                var time = new Date();
-                $(this).closest("span.date").innerHTML = d.toDateString();
             } else {
                 alert("Snapshot limit is 5")
             }
@@ -161,17 +157,60 @@
         var vms = null
             //pull data from db
         function pull(username) {
-            $.get("http://10.128.1.150/?username=" + username, function(data) {
+            // $.get("http://10.128.1.150/?username=" + username, function(data) {
+            //
+            //
+            // });
 
-                vms = JSON.parse(data)
-                for (var i in vms) {
-                    var li = $("li.vm")[i]
-                    $(li).find("span.ip").html(vms[i].ip)
-                    $(li).find("span.name").html(vms[i].name)
-                    $(li).data("vm", vms[i])
-                }
+            var url = "http://10.128.1.150/"
+            $.ajax({
+                url: url,
+                method: "POST",
+                data: "username=" + username,
+                success: function(data) {
+                    vms = JSON.parse(data)
+                    for (var i in vms) {
+                        var li = $("li.vm")[i];
+                        $(li).find("span.ip").html(vms[i].ip);
+                        $(li).find("span.name").html(vms[i].name);
+                        $(li).data("vm", vms[i]);
+                    }
+                },
             });
         }
+
+        $("div.machine span button").click(function() {
+
+
+            // ?? who is active ??
+            $("nav ul li.active").data("vm").name
+
+
+            var url = "http://10.128.1.150/action/index.php";
+            $.ajax({
+                url: url,
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    name: $("nav ul li.active").data("vm").name,
+                    action: $(this).attr("data-name")
+                },
+                success: function(data) {
+                    console.log(data)
+                    switch (data.status) {
+                        case 200:
+                            console.log("-_____-");
+                            break;
+                        case 404:
+                            alert(data.message);
+                            break;
+                        default:
+
+                    }
+                },
+            });
+
+        })
     </script>
 </body>
 
