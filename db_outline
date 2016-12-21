@@ -1,0 +1,45 @@
+#Database
+
+Node Table
+1. ID
+2. NAME
+3. IP
+4. STATE (Running, Shutoff)
+5. VNC PORT
+6. VNC PASS
+7. HOST
+
+User Table
+1. ID
+2. USERNAME
+3. PID
+
+Relationships
+1. ID
+2. FK NODE
+3. FK USERNAME
+
+Action
+1. ID
+2. Node ID
+3. Action (Start, Stop, Restart, Snapshot)
+4. Date
+
+
+Create Snapshots table with actions to practice
+1. ID
+2. Node ID
+3. Action (Start, Stop, Restart, Snapshot)
+4. Date
+
+
+
+
+#date command
+default current_timestamp
+
+
+In sample table must have 9 Nodes
+
+401 = Server A
+402 = Server B

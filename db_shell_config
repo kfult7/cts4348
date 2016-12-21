@@ -1,0 +1,43 @@
+#Creating Database and Tables
+
+yum -y install -y mariadb-server
+systemctl start mariadb
+
+
+mysql -u root -e "create database cts4348;"
+
+mysql -D cts4348 -u root -e "create table node(id int AUTO_INCREMENT, name varchar(30), ip varchar(16), state varchar(10), vnc_port int, vnc_passwd varchar(30), host varchar(30), PRIMARY KEY(id));"
+
+mysql -D cts4348 -u root -e "create table user(id int AUTO_INCREMENT, username varchar(30), pid int, PRIMARY KEY(id));"
+
+mysql -D cts4348 -u root -e "create table relation(id int AUTO_INCREMENT, nodeID int, userID int, PRIMARY KEY(id));"
+
+
+
+#Dummy Data
+
+insert into node (name, ip, state, vnc_port, vnc_passwd, host) values ( "node1", "10.128.1.101", "running", "41001", "PASSWORD1", "cts4348-a" );
+insert into node (name, ip, state, vnc_port, vnc_passwd, host) values ( "node2", "10.128.2.101", "running", "42001", "PASSWORD2", "cts4348-b" );
+insert into node (name, ip, state, vnc_port, vnc_passwd, host) values ( "node3", "10.128.1.102", "running", "41002", "PASSWORD3", "cts4348-a" );
+insert into node (name, ip, state, vnc_port, vnc_passwd, host) values ( "node4", "10.128.2.102", "running", "42002", "PASSWORD4", "cts4348-b" );
+insert into node (name, ip, state, vnc_port, vnc_passwd, host) values ( "node5", "10.128.2.103", "running", "42003", "PASSWORD5", "cts4348-b" );
+insert into node (name, ip, state, vnc_port, vnc_passwd, host) values ( "node6", "10.128.1.103", "running", "41003", "PASSWORD6", "cts4348-a" );
+
+insert into user ( username, pid) values ( "gfgomez", "123456789");
+insert into user ( username, pid) values ( "ahern419", "123456789");
+insert into user ( username, pid) values ( "kfult002", "123456789");
+
+insert into relation ( nodeID, userID) values ( 1, 1);
+insert into relation ( nodeID, userID) values ( 2, 1);
+insert into relation ( nodeID, userID) values ( 3, 1);
+insert into relation ( nodeID, userID) values ( 4, 2);
+insert into relation ( nodeID, userID) values ( 5, 2);
+insert into relation ( nodeID, userID) values ( 6, 2);
+insert into relation ( nodeID, userID) values ( 7, 3);
+insert into relation ( nodeID, userID) values ( 8, 3);
+insert into relation ( nodeID, userID) values ( 9, 3);
+
+
+
+#QUERY
+mysql -D cts4348 -e "SELECT * FROM node INNER JOIN relation on node.id = relation.nodeID  INNER JOIN user on user.id = relation.userID WHERE user.username= '"$1"'"
