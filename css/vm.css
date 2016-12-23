@@ -73,6 +73,9 @@ main section div.container div.vm div.machine span button {
     width: 100%;
 }
 
+
+
+
 main section div.container div.vm div.machine span button:before {
     content: attr(data-icon);
     color: #bdbdbd;
@@ -172,6 +175,10 @@ main section div.container div.vm div.snapshots ul li span:first-child {
     margin: 0px;
 }
 
+main section div.container div.vm ul li span.action{
+    width: 125px;
+}
+
 main section div.container div.vm ul li span.action:before {
     content: attr(data-icon);
     font-family: 'Material Icons';
@@ -184,4 +191,9 @@ main section div.container div.vm div.machine span div.progressbar {
     width: 0%;
     position: absolute;
     line-height: inherit
+}
+
+
+.hidden {
+  display: none;
 }

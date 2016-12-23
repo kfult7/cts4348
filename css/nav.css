@@ -50,8 +50,38 @@ main section nav ul {
   box-sizing: border-box;
   height: 100%;
   padding: 0px;
+  position: relative;
   width: inherit;
 }
+
+main section nav ul::after {
+  border-top: 15px solid transparent ;
+  border-bottom: 15px solid transparent ;
+  border-right:15px solid grey ;
+  border-left:15px solid transparent ;
+  content:" ";
+  right: -1px;
+  margin: 0px 0px 0px 0px;
+  transition: top .5s ease-in-out;
+  position: absolute;
+}
+
+main section nav ul.one::after {
+  top: 10%;
+}
+
+main section nav ul.two::after {
+  top: 35%;
+}
+
+main section nav ul.three::after {
+  top: 60%;
+}
+
+main section nav ul.four::after {
+  top: 85%;
+}
+
 
 main section nav ul li {
   font-family: 'Ubuntu', sans-serif;
@@ -67,7 +97,7 @@ main section nav ul li.active {
   background: #e0e0e0;
 }
 
-main section nav ul li.active::after {
+/*main section nav ul li.active::after {
   border-top: 15px solid transparent ;
   border-bottom: 15px solid transparent ;
   border-right:15px solid white ;
@@ -77,7 +107,7 @@ main section nav ul li.active::after {
   right: -1px;
   margin: 0px 0px -8px 0px;
   position: absolute;
-}
+}*/
 
 main section nav ul li:hover:not(.active) {
   background-color: #9E9E9E;

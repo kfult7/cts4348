@@ -24,11 +24,11 @@
 
         <section>
             <nav>
-                <ul>
-                    <li class="user active"><span class="user">GG</span><span class="ip" style="bottom: 15px; font-size: 14px;">Welcome ggome002</span></li>
-                    <li class="vm" data-vm="101"><span class="name">Node 101</span><span class="ip">10.128.1.101</span></li>
-                    <li class="vm" data-vm="102"><span class="name">Node 102</span><span class="ip">10.128.1.102</span></li>
-                    <li class="vm" data-vm="103"><span class="name">Node 103</span><span class="ip">10.128.1.103</span></li>
+                <ul class="one">
+                    <li class="user active" data-position="one"><span class="user">GG</span><span class="ip" style="bottom: 15px; font-size: 14px;">Welcome ggome002</span></li>
+                    <li class="vm" data-vm="101" data-position="two"><span class="name">Node 101</span><span class="ip">10.128.1.101</span></li>
+                    <li class="vm" data-vm="102" data-position="three"><span class="name">Node 102</span><span class="ip">10.128.1.102</span></li>
+                    <li class="vm" data-vm="103" data-position="four"><span class="name">Node 103</span><span class="ip">10.128.1.103</span></li>
                 </ul>
             </nav>
 
@@ -64,7 +64,7 @@
                         <span>
                           <button data-icon="&#xE037;" data-name="start"></button>
                           <button data-icon="&#xE047;" data-name="stop"></button>
-                          <button data-icon="&#xE042;" data-name="restart"></button>
+                          <button data-icon="&#xE8BA;" data-name="restore"></button>
                         </span>
                     </div>
 
@@ -73,13 +73,25 @@
                         <h3>snapshots</h3>
                         <p>Vivamus augue erat, sagittis a lorem at, blandit faucibus quam. Praesent ultricies quis lacus non aliquam.</p>
                         <ul>
-                            <li><span class="title">Snapshot 1</span><span class="date">January 20, 2017</span><span class="action"><button data-icon="&#xE8B3;"></button><button data-icon="&#xE872;"></button></span>
-                                <li><span class="title">Snapshot 2</span><span class="date">February 20, 2017</span><span class="action"><button data-icon="&#xE8B3;"></button><button data-icon="&#xE872;"></button></span></li>
-                                <!-- <li><span class="title">Snapshot 3</span><span class="date">March 20, 2017</span><span class="action"><button data-icon="&#xE8B3;"></button><button data-icon="&#xE872;"></button></span></li> -->
-                                <li><span class="title">Snapshot 4</span><span class="date">April 20, 2017</span><span class="action"><button class="delete">remove</button></span></li>
+                            <li>
+                                <span class="title">Snapshot 1</span>
+                                <span class="date">2016-12-22 18:12:30</span>
+                                <span class="action">
+                                  <button data-icon="&#xE8B3;" class="restore"></button>
+                                  <button data-icon="&#xE872;" class="delete"></button>
+                                </span>
+                            </li>
 
-                                <li class="new"><span class="title" contenteditable="true">new snapshot</span><span class="date">now</span><span class="action" data-icon="&#xE2C6;"> <button class="add">add</button></span></li>
-                                <li class="template"><span class="title" contenteditable="true">name</span><span class="date">now</span><span class="action" data-icon="&#xE2C6;"><button class="add">add</button></span></li>
+
+                            <li class="template">
+                                <span class="title" contenteditable="true">new snapshot</span>
+                                <span class="date">now</span>
+                                <span class="action">
+                                  <button data-icon="&#xE2C6;" class="add"></button>
+                                  <button data-icon="&#xE8B3;" class="hidden restore"></button>
+                                  <button data-icon="&#xE872;" class="hidden delete"></button>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -88,130 +100,7 @@
         </section>
     </main>
 
-    <script>
-        // display date
-        var d = new Date();
-        document.getElementById("date").innerHTML = d.toDateString();
-
-        // navigation
-        $("main section nav ul li").click(
-            function() {
-                $("main section nav ul li").removeClass("active");
-                $("div.container div").removeClass("active");
-                $("div." + $(this).attr("class")).addClass("active");
-                $(this).addClass("active");
-                if ($(this).hasClass("vm")) {
-                    $("div.container div.vm h2").html($(this).find("span.name").html());
-                }
-
-                if (vms !== null) {
-                    var thisVM = $(this).data("vm")
-                    $("div.machine ul li.host").html(thisVM.host);
-                    $("div.machine ul li.port").html(thisVM.vnc_port);
-                    $("div.machine ul li.password").html(thisVM.vnc_password);
-                }
-
-            }
-        )
-
-        // progress bar
-        function progress() {
-            var elem = document.getElementById("progressBar");
-            var width = 1;
-            var id = setInterval(frame, 50);
-
-            function frame() {
-                if (width >= 100) {
-                    clearInterval(id);
-                } else {
-                    width++;
-                    elem.style.width = width / 3 + '%';
-                    document.getElementById("bar").innerHTML = width * 1 + '%';
-                }
-            }
-        }
-
-        // delete snapshot
-        $("button.delete").click(function() {
-
-            $(this).closest("li").remove();
-        })
-
-        // add snapshot
-        $("button.add").click(function() {
-
-            if ($("div.snapshots ul li").length < 6) {
-                $(this).closest("li").removeClass("new").find(".title").removeAttr("contenteditable");
-                $(this).remove();
-                $("div.snapshots ul").append($("div.snapshots ul li.template").clone(true).removeClass("template"));
-            } else {
-                alert("Snapshot limit is 5")
-            }
-        })
-
-        // clear new snapshot name
-        $("div.snapshots ul li.new span.title").click(function() {
-            $(this).closest("span.title").html("");
-        });
-
-        var vms = null
-            //pull data from db
-        function pull(username) {
-            // $.get("http://10.128.1.150/?username=" + username, function(data) {
-            //
-            //
-            // });
-
-            var url = "http://10.128.1.150/"
-            $.ajax({
-                url: url,
-                method: "POST",
-                data: "username=" + username,
-                success: function(data) {
-                    vms = JSON.parse(data)
-                    for (var i in vms) {
-                        var li = $("li.vm")[i];
-                        $(li).find("span.ip").html(vms[i].ip);
-                        $(li).find("span.name").html(vms[i].name);
-                        $(li).data("vm", vms[i]);
-                    }
-                },
-            });
-        }
-
-        $("div.machine span button").click(function() {
-
-
-            // ?? who is active ??
-            $("nav ul li.active").data("vm").name
-
-
-            var url = "http://10.128.1.150/action/index.php";
-            $.ajax({
-                url: url,
-                method: "POST",
-                dataType: "JSON",
-                data: {
-                    name: $("nav ul li.active").data("vm").name,
-                    action: $(this).attr("data-name")
-                },
-                success: function(data) {
-                    console.log(data)
-                    switch (data.status) {
-                        case 200:
-                            console.log("-_____-");
-                            break;
-                        case 404:
-                            alert(data.message);
-                            break;
-                        default:
-
-                    }
-                },
-            });
-
-        })
-    </script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>
