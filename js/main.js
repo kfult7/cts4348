@@ -19,23 +19,19 @@ $("main section nav ul li").click(
             $("div.machine ul li.host").html(thisVM.host);
             $("div.machine ul li.port").html(thisVM.vnc_port);
             $("div.machine ul li.password").html(thisVM.vnc_password);
-	    console.log(thisVM)	
+            console.log(thisVM)
             $("div.snapshots ul li:not(.template) ").remove();
-	    for(var i in thisVM.snapshots){
-            	var li = $("div.snapshots ul li.template").clone(true).removeClass("template");
-                $(li).find(".title").removeAttr("contenteditable");            
-	        $(li).find("span.title").html(thisVM.snapshots[i].name);
-            	$(li).find("span.date").html(thisVM.snapshots[i].timestamp);
-            	$("div.snapshots ul").append(li);
-	    }
-	    newSnapshot()	
+            for (var i in thisVM.snapshots) {
+                var li = $("div.snapshots ul li.template").clone(true).removeClass("template");
+                $(li).find(".title").removeAttr("contenteditable");
+                $(li).find("span.title").html(thisVM.snapshots[i].name);
+                $(li).find("span.date").html(thisVM.snapshots[i].timestamp);
+                $("div.snapshots ul").append(li);
+            }
         }
-
-
 
         $("main section nav ul").removeAttr("class")
         $("main section nav ul").addClass($(this).attr("data-position"))
-
     }
 )
 
@@ -84,8 +80,10 @@ newSnapshot();
 $("button.add").click(newSnapshot)
 
 // clear new snapshot name
-$("div.snapshots ul li.new span.title").click(function() {
-    $(this).closest("span.title").html("");
+$("div.snapshots ul li span.title").click(function() {
+    if ($(this).closest("span.title").html() == "new snapshot") {
+        $(this).closest("span.title").html("");
+    }
 });
 
 //pull data from db
