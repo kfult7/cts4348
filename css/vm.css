@@ -1,7 +1,7 @@
 main section div.container div.vm h2 {
     font-family: 'Ubuntu', sans-serif;
     font-size: 30px;
-    margin: 0px 0px 30px;
+    margin: 0px 15px 30px;
     height: 56px;
     /*background: pink;*/
     line-height: 56px;
@@ -22,9 +22,9 @@ main section div.container div.vm:before {
 main section div.container div.vm div.machine ul {
     border: 1px solid lightgrey;
     display: inline-block;
-    margin: 0px 0px 0px 0px;
-    padding: 10px 0px;
-    width: 285px;
+    margin: 0px 0px 0px 20px;
+    padding: 10px 20px;
+    width: 225px;
     font-size: 12px;
     line-height: 5px;
 }
@@ -119,13 +119,14 @@ main section div.container div.vm div.snapshots {
 }
 
 main section div.container div.vm div.snapshots ul {
+    box-shadow: 0 0 200px .1px lightgray;
     bottom: 25px;
     right: 50px;
     margin: 0px;
     padding: 0px;
     width: 100%;
     line-height: 30px;
-    
+
 }
 
 main section div.container div.vm div.snapshots ul li {
@@ -133,7 +134,7 @@ main section div.container div.vm div.snapshots ul li {
     font-size: 14px;
     list-style: none;
     padding: 0px;
-    padding: 5px 30px;
+    padding: 5px 55px;
     margin: 0px;
 }
 
