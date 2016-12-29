@@ -130,10 +130,9 @@ main section div.container div.vm div.snapshots ul {
 }
 
 main section div.container div.vm div.snapshots ul li {
-    border-top: 1px solid lightgrey;
+    border-bottom: .5px solid lightgrey;
     font-size: 14px;
     list-style: none;
-    padding: 0px;
     padding: 5px 55px;
     margin: 0px;
 }
@@ -167,8 +166,8 @@ main section div.container div.vm div.snapshots ul li.new {
     color: grey;
 }
 
-main section div.container div.vm div.snapshots ul li:first-child {
-    border-top: none;
+main section div.container div.vm div.snapshots ul li:last-child {
+    border-bottom: none;
 }
 
 main section div.container div.vm div.snapshots ul li span {

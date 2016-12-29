@@ -4,36 +4,34 @@ document.getElementById("date").innerHTML = d.toDateString();
 
 
 // navigation
-$("main section nav ul li").click(
-    function() {
-        $("main section nav ul li").removeClass("active");
-        $("div.container div").removeClass("active");
-        $("div." + $(this).attr("class")).addClass("active");
-        $(this).addClass("active");
-        if ($(this).hasClass("vm")) {
-            $("div.container div.vm h2").html($(this).find("span.name").html());
-        }
-
-        if (vms !== null) {
-            var thisVM = $(this).data("vm")
-            $("div.machine ul li.host").html(thisVM.host);
-            $("div.machine ul li.port").html(thisVM.vnc_port);
-            $("div.machine ul li.password").html(thisVM.vnc_password);
-            console.log(thisVM)
-            $("div.snapshots ul li:not(.template) ").remove();
-            for (var i in thisVM.snapshots) {
-                var li = $("div.snapshots ul li.template").clone(true).removeClass("template");
-                $(li).find(".title").removeAttr("contenteditable");
-                $(li).find("span.title").html(thisVM.snapshots[i].name);
-                $(li).find("span.date").html(thisVM.snapshots[i].timestamp);
-                $("div.snapshots ul").append(li);
-            }
-        }
-
-        $("main section nav ul").removeAttr("class")
-        $("main section nav ul").addClass($(this).attr("data-position"))
+$("main section nav ul li").click(function() {
+    $("main section nav ul li").removeClass("active");
+    $("div.container div").removeClass("active");
+    $("div." + $(this).attr("class")).addClass("active");
+    $(this).addClass("active");
+    if ($(this).hasClass("vm")) {
+        $("div.container div.vm h2").html($(this).find("span.name").html());
     }
-)
+
+    if (vms !== null) {
+        var thisVM = $(this).data("vm")
+        $("div.machine ul li.host").html(thisVM.host);
+        $("div.machine ul li.port").html(thisVM.vnc_port);
+        $("div.machine ul li.password").html(thisVM.vnc_password);
+        console.log(thisVM)
+        $("div.snapshots ul li:not(.template)").remove();
+        for (var i in thisVM.snapshots) {
+            var li = $("div.snapshots ul li.template").clone(true).removeClass("template");
+            $(li).find(".title").removeAttr("contenteditable");
+            $(li).find("span.title").html(thisVM.snapshots[i].name);
+            $(li).find("span.date").html(thisVM.snapshots[i].timestamp);
+            $("div.snapshots ul").append(li);
+        }
+    }
+
+    $("main section nav ul").removeAttr("class")
+    $("main section nav ul").addClass($(this).attr("data-position"))
+})
 
 // progress bar
 function progress() {
@@ -52,21 +50,24 @@ function progress() {
     }
 }
 
-
-
 // delete snapshot
 $("button.delete").click(function() {
-    $(this).closest("li").remove();
+    if (($("div.snapshots ul li:not(.template)").length == 5) && ($("div.snapshots ul li span.title").last().html() != "new snapshot")) {
+        $("div.snapshots ul").append($("div.snapshots ul li.template").clone(true).removeClass("template"));
+    }
+    var name = $("div.snapshots ul li").find("span.title").html();
+    if (confirm("Are you sure you want to delete this snapshot?")) {
+        $(this).closest("li").remove();
+    }
 })
 
 // new snapshot actions
 function newSnapshot() {
-    if ($("div.snapshots ul li").length < 6) {
+    if ($("div.snapshots ul li:not(.template)").length < 6) {
         var li = $(this).closest("li");
 
         if ($(li).find("span.title").html() === "" || $(li).find("span.title").html() === "new snapshot") {
-            alert("Please give this snapshot a name")
-            $(li).find("span.title").html("new snapshot");
+            alert("Please give this snapshot a name");
             return;
         }
 
@@ -76,7 +77,10 @@ function newSnapshot() {
         var d = new Date();
         var myDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" + d.getDate() : d.getDate()) + " " + (d.getHours() < 10 ? "0" + d.getHours() : d.getHours()) + ":" + (d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes()) + ":" + (d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds())
         $(li).find("span.date").html(myDate);
-        $("div.snapshots ul").append($("div.snapshots ul li.template").clone(true).removeClass("template"));
+
+        if ($("div.snapshots ul li:not(.template)").length < 5) {
+            $("div.snapshots ul").append($("div.snapshots ul li.template").clone(true).removeClass("template"));
+        }
     } else {
         alert("Snapshot limit is 5")
     }
@@ -84,7 +88,7 @@ function newSnapshot() {
 
 // add snapshot
 newSnapshot();
-$("button.add").click(newSnapshot)
+$("button.add").click(newSnapshot);
 
 // clear new snapshot name
 $("div.snapshots ul li span.title").click(function() {
@@ -93,12 +97,19 @@ $("div.snapshots ul li span.title").click(function() {
     }
 });
 
+// insert name if blank
+$("div.snapshots ul li span.title").blur(function() {
+    if ($(this).closest("span.title").html() === "") {
+        $(this).closest("span.title").html("new snapshot");
+    }
+});
+
 //limit snapshot name size
-var max = 12;
+var maxSnapshotName = 12;
 $("div.snapshots ul li span.title").keypress(function(e) {
     var snapshotName = $(this).closest("span.title").html()
 
-    if (snapshotName.length === max) {
+    if (snapshotName.length === maxSnapshotName) {
         e.preventDefault();
     }
 });
